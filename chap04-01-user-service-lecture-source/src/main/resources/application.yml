@@ -4,7 +4,6 @@ server:
 spring:
   application:
     name: swcamp-user-service
-
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/menudb
@@ -26,6 +25,7 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
     fetch-registry: true
+    register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
 
@@ -33,3 +33,10 @@ eureka:
 swcamp:
   message: Let's do msa!
 
+token:
+
+#  JWT 토큰의 만료시간 설정(ms단위)
+  expiration_time: 43200000
+
+#  JWT 토큰의 Verify Signature를 위한 secret-key
+  secret: l1Z5I9WufSD5qM0UTHXDJa1kaGxBlyhKMbx+ONkqzeRTlKdF8Bq37mA3Z8nhjRlwVUrL/u3bdkFeamIrUoWvVw==
