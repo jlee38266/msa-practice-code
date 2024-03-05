@@ -30,7 +30,7 @@ public class FirstServiceController {
     @GetMapping("health_check")
     public String healthCheck() {
 
-        /* 설명. first-service 어플리케이션 여려개 실행 시(스케일 아웃) 실행되는 어플리케이션 확인(포트 번호로) */
+        /* 설명. first-service 어플리케이션 여러개 실행 시(스케일 아웃) 실행되는 어플리케이션 확인(포트 번호로) */
         /* 설명. Gateway의 lb(로드 밸런싱)를 통해 RoundRobin 방식으로 스위칭 됨을 확인 */
         return "I'm OK" + env.getProperty("local.server.port");
     }
