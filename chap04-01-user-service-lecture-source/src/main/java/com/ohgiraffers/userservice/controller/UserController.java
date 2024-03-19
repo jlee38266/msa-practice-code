@@ -37,7 +37,7 @@ public class UserController {
      *  application.yml 파일로부터 설정 값을 불러오기 위해서는 두 가지 방법이 제공된다.
      *  1. Environment를 의존성 주입 받아 getProperty로 설정 키 값을 작성해 불러오는 방법
      *  2. @Value를 활용해 필드로 주입 받고 활용하는 방법
-    * */
+     * */
 
     /* 설명. 1. Environment 활용해 설정값 불러오기(getProperty) */
     @GetMapping("/health_check")
@@ -56,6 +56,9 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<ResponseUser> registUser(@RequestBody RequestUser user) {
 
+        /* 설명. config server에서 제공하는 test.message 값 확인 */
+        System.out.println("config server의 설정값 확인: " +
+                env.getProperty("test.message"));
         /* 설명. RequestUser -> UserDTO*/
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 //        System.out.println("userDTO = " + userDTO);
@@ -69,5 +72,14 @@ public class UserController {
         ResponseUser responseUser = modelMapper.map(userDTO, ResponseUser.class);
 //        responseUser.setName("응답잘되네");
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<ResponseUser> getUser(@PathVariable("id") String id) {
+        UserDTO userDTO = userService.getUserById(id);
+
+        ResponseUser returnValue = modelMapper.map(userDTO, ResponseUser.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(returnValue);
     }
 }

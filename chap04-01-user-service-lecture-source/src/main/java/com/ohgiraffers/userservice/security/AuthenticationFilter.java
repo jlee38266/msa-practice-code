@@ -93,7 +93,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-//        super.successfulAuthentication(request, response, chain, authResult);
         System.out.println("authResult = " + authResult);
         String email = ((User) authResult.getPrincipal()).getUsername();
 
